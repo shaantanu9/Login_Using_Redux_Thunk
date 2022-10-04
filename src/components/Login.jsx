@@ -6,11 +6,13 @@ const Login = () => {
   // const [data, setdata] = useState([]);
 
   const dispatch = useDispatch();
-  const { token, isAuth } = useSelector((state) => state.loginReducer);
+  const { token, isAuth, isLoading, error } = useSelector(
+    (state) => state.loginReducer
+  );
   const formik = useFormik({
     initialValues: {
-      email: "shantanubombatkar13@gmail.com",
-      password: "",
+      email: "demo1@gmail.com",
+      password: "asf232!2221A",
       keepMeLogin: true
     },
     onChange: (values) => {
@@ -27,6 +29,8 @@ const Login = () => {
     <>
       <h1>Login Form</h1>
       <h3>Using Redux and Thunk MiddleWare</h3>
+      {isLoading && <p>loading...</p>}
+      {error && <p>Not a Valid Credential Please Try Again</p>}
       {isAuth && (
         <>
           <p>isAuth True</p>

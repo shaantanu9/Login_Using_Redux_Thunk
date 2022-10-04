@@ -1,2 +1,2 @@
-import { LOGIN } from "./loginTypes";
-export { LOGIN };
+import { LOGIN, ERROR, LOADING } from "./loginTypes";
+export { LOGIN, ERROR, LOADING };
