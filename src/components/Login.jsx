@@ -1,9 +1,19 @@
 import { useFormik } from "formik";
-import { loginRequest, logout } from "../redux/action/creators";
+import { setTokenState, loginRequest, logout } from "../redux/action/creators";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getToken } from "../utils";
 
 const Login = () => {
   // const [data, setdata] = useState([]);
+
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      console.warn(token, "token from useEffect");
+      dispatch(setTokenState(token));
+    }
+  }, []);
 
   const dispatch = useDispatch();
   const logoutFunc = () => {
@@ -43,26 +53,28 @@ const Login = () => {
           </pre>
         </>
       )}
-      <form onSubmit={formik.handleSubmit}>
-        <input
-          id="email"
-          type="email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-        />
-        <br />
-        <br />
-        <input
-          type="password"
-          id="password"
-          value={formik.values.password}
-          placeholder="password"
-          onChange={formik.handleChange}
-        />
-        <br />
-        <br />
-        <input type="submit" value="Login" />
-      </form>
+      {!isAuth && (
+        <form onSubmit={formik.handleSubmit}>
+          <input
+            id="email"
+            type="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+          />
+          <br />
+          <br />
+          <input
+            type="password"
+            id="password"
+            value={formik.values.password}
+            placeholder="password"
+            onChange={formik.handleChange}
+          />
+          <br />
+          <br />
+          <input type="submit" value="Login" disabled={isAuth} />
+        </form>
+      )}
       {isAuth && <button onClick={() => logoutFunc()}>Logout</button>}
     </>
   );

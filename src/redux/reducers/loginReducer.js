@@ -1,4 +1,4 @@
-import { LOGIN, ERROR, LOADING, LOGOUT } from "../action/types";
+import { LOGIN, ERROR, LOADING, LOGOUT, SET_TOKEN } from "../action/types";
 
 const initialState = {
   isAuth: false,
@@ -8,6 +8,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, { type, payload }) => {
+  console.log(payload, "payload");
   switch (type) {
     case LOGIN:
       return {
@@ -29,6 +30,12 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     case LOGOUT:
       return { ...initialState };
+    case SET_TOKEN:
+      return {
+        ...state,
+        isAuth: true,
+        token: payload
+      };
     default:
       return state;
   }

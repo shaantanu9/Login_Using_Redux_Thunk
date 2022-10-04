@@ -1,4 +1,4 @@
-import { LOGIN, ERROR, LOADING, LOGOUT } from "../types";
+import { LOGIN, ERROR, LOADING, LOGOUT, SET_TOKEN } from "../types";
 import axios from "axios";
 import { setToken, removeToken } from "../../../utils";
 
@@ -45,4 +45,11 @@ const loginRequest = (data) => {
   };
 };
 
-export { loginRequest, login, error, loading, logout };
+const setTokenState = (token) => {
+  return {
+    type: SET_TOKEN,
+    payload: token
+  };
+};
+
+export { loginRequest, login, error, loading, logout, setTokenState };
