@@ -1,13 +1,13 @@
-import { LOGIN, ERROR, LOADING } from "../action/types";
+import { LOGIN, ERROR, LOADING, LOGOUT } from "../action/types";
 
-const intialState = {
+const initialState = {
   isAuth: false,
   token: null,
   isLoading: false,
   error: false
 };
 
-const reducer = (state = intialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case LOGIN:
       return {
@@ -27,6 +27,8 @@ const reducer = (state = intialState, { type, payload }) => {
         token: null,
         error: false
       };
+    case LOGOUT:
+      return { ...initialState };
     default:
       return state;
   }

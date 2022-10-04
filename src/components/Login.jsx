@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import { loginRequest } from "../redux/action/creators";
+import { loginRequest, logout } from "../redux/action/creators";
 import { useDispatch, useSelector } from "react-redux";
+
 const Login = () => {
   // const [data, setdata] = useState([]);
 
   const dispatch = useDispatch();
+  const logoutFunc = () => {
+    dispatch(logout());
+  };
   const { token, isAuth, isLoading, error } = useSelector(
     (state) => state.loginReducer
   );
@@ -60,6 +63,7 @@ const Login = () => {
         <br />
         <input type="submit" value="Login" />
       </form>
+      {isAuth && <button onClick={() => logoutFunc()}>Logout</button>}
     </>
   );
 };

@@ -1,3 +1,3 @@
-import { loginRequest, login, error, loading } from "./loginCreator";
+import { loginRequest, login, error, loading, logout } from "./loginCreator";
 
-export { loginRequest, login, loading, error };
+export { loginRequest, login, loading, error, logout };

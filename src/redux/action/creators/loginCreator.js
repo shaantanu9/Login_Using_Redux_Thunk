@@ -1,14 +1,22 @@
-import { LOGIN, ERROR, LOADING } from "../types";
+import { LOGIN, ERROR, LOADING, LOGOUT } from "../types";
 import axios from "axios";
+import { setToken, removeToken } from "../../../utils";
+
 // import axios from "../../../api/baseAxios";
 const login = (data) => {
-  console.log(data, "deom login");
+  // console.log(data, "deom login");
+  setToken(data.token);
   return {
     type: LOGIN,
     payload: data
   };
 };
-
+const logout = () => {
+  removeToken();
+  return {
+    type: LOGOUT
+  };
+};
 const error = () => {
   return {
     type: ERROR
@@ -37,4 +45,4 @@ const loginRequest = (data) => {
   };
 };
 
-export { loginRequest, login, error, loading };
+export { loginRequest, login, error, loading, logout };
